@@ -12,12 +12,12 @@ import logging
 
 from enum import Enum
 
-# logging.basicConfig(
-#     level=logging.INFO,  # Set the minimum log level to INFO
-#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'  # Define log message format
-# )
+logging.basicConfig(
+    level=logging.INFO,  # Set the minimum log level to INFO
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'  # Define log message format
+)
 
-# logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 #### Assignment 1
 # create different folders and put the contents of the folder in respective folders 
@@ -30,10 +30,10 @@ can revert the changes made as well if the variable values are persisted
 
 what can be done more 
 
-logging implementation 
+logging implementation - use log instead of print
 effective try catch / exception handling 
 extracting this out as its own utility or could it be run as a script ?
-
+ usage ?
 
 
 
@@ -43,7 +43,6 @@ extracting this out as its own utility or could it be run as a script ?
 ### TODO reverting changes ? Roll back  - Done - need to check how to persist the variable values
     ### Any way to keep the list of files and file extensions persistent in one run more ? - running as a script 
 
-## find different file extensions and create folder for them 
 
 
 class FolderName(Enum):
@@ -75,10 +74,10 @@ def get_files_list_from_location(base_location):
     files_list = []
     for item in initial_list:
         if os.path.isdir(os.path.join(base_location,item)):
-            print(f"This is a directory: {item}")
+            logger.info(f"This is a directory: {item}")
         else:
             files_list.append(item)
-            print("-----appended--------")
+            logger.info("-----appended--------")
     return sorted(files_list)
     
 def extract_file_extension_from_folder(sorted_listdir):
@@ -99,7 +98,7 @@ def strip_off_particular_character_from_list(list_for_sanitization,character_to_
         for extension in list_for_sanitization:
             sanitized_extracted_extensions.append(extension.strip(character_to_strip))
         
-        print(f"stripping off {character_to_strip} from list. sanitized list is : {sanitized_extracted_extensions} ") # TODO replace with logs 
+        logger.info(f"stripping off {character_to_strip} from list. sanitized list is : {sanitized_extracted_extensions} ") # TODO replace with logs 
         
         return sanitized_extracted_extensions
         
@@ -110,13 +109,13 @@ def create_folder_based_on_list_items(input_list,path_where_folder_is_required_t
      
         # create folder based on the new list 
     for file in folder_names:
-         print(f"----folder_name is : {file}")
+         logger.info(f"----folder_name is : {file}")
          directory_path = os.path.join(path_where_folder_is_required_to_be_created,file)
          if not os.path.exists(directory_path):
              os.mkdir(directory_path)
-             print(f"folder created for {file} ")  # TODO replace with logs 
+             logger.info(f"folder created for {file} ")  # TODO replace with logs 
          else:
-             print(f"Directory '{directory_path}' already exists, skipping creation.")        
+             logger.info(f"Directory '{directory_path}' already exists, skipping creation.")        
 
 
 def get_unique_folder_names(folder_list):
@@ -124,7 +123,7 @@ def get_unique_folder_names(folder_list):
     for name in folder_list:
          folder_names.append(FolderName.get_enum_name_by_value(name))
     
-    print(f"folder names extracted are : {set(folder_names)}") 
+    logger.info(f"folder names extracted are : {set(folder_names)}") 
     return set(folder_names)
 
 def move_files_to_related_folders(file_extensions,files_to_move,base_path):
@@ -136,7 +135,7 @@ def move_files_to_related_folders(file_extensions,files_to_move,base_path):
                 if os.path.splitext(file)[1]== ext:
                     shutil.move(source_path,destination_path)
                 
-        print("---Moving files to related folders completed---, Awesome Job!! ")  # TODO replace with logs  
+        logger.info("---Moving files to related folders completed---, Awesome Job!! ")  # TODO replace with logs  
 
     
     
@@ -155,20 +154,20 @@ def reverting_changes(folder_list,files_to_move,base_path):
                  entries = os.listdir(source_base_path)
                  if not entries:
                      os.rmdir(source_base_path)
-                     print(" the directory {source_base_path} is deleted") 
+                     logger.info(f" the directory {source_base_path} is deleted") 
                  else:
-                     print(" the directory {source_base_path} is still not empty") 
-     print("------------Changes Reverted Successfully--------------------")
+                     logger.info(f" the directory {source_base_path} is still not empty") 
+     logger.info("------------Changes Reverted Successfully--------------------")
                 
    
    
 def glued(folder_path):
     files_under_consideration = get_files_list_from_location(folder_path)
             
-    print(f" your sorted file names are {files_under_consideration}")
+    logger.info(f" your sorted file names are {files_under_consideration}")
     
     extracted_extensions=extract_file_extension_from_folder(files_under_consideration)
-    print(f"extracted extensions from the files are : {extracted_extensions}")
+    logger.info(f"extracted extensions from the files are : {extracted_extensions}")
     
     create_folder_based_on_list_items(extracted_extensions,folder_path)
     

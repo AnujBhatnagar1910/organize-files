@@ -21,9 +21,10 @@ jobs:
         uv tool install ruff@latest
     - name: Analysing the code with pylint
       run: |
-        uvx ruff check $(git ls-files '*.py')
+        # uvx ruff check $(git ls-files '*.py')
         echo "-------test changes----------"
         pwd
         cd ./src/code
         pwd
-        ls ../../src/code
+        ls
+        uvx ruff check

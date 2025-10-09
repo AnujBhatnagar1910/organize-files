@@ -22,3 +22,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         uvx ruff check $(git ls-files '*.py')
+        $(git ls-files '*.py')

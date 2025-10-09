@@ -5,6 +5,8 @@
 
 # to sort the contents of the folder by name 
 
+##TODO - how to make it useful for the user to use this ? desktop app with a ui ?
+# worth checking - https://code-b.dev/blog/building-desktop-applications-using-python
 
 import os
 import shutil
@@ -24,16 +26,16 @@ logger = logging.getLogger(__name__)
 
 '''
 What it does 
-on a particular location , it will scan all the files in the location and move the files to appropriate folders 
+On a particular folder location , it will scan all the files in the location and move the files to appropriate folders 
 
-can revert the changes made as well if the variable values are persisted
+It can revert the changes made as well in the same session 
+logging implementation - use log instead of print - basic logging implemented 
 
-what can be done more 
-
-logging implementation - use log instead of print
-effective try catch / exception handling 
-extracting this out as its own utility or could it be run as a script ?
- usage ?
+Future implementations:
+-Effective try catch / exception handling 
+-Extracting this out as its own utility or could it be run as a script ?
+-May be creating another utility function to extract all the files outside of all the folders ( a pre-requisite for further sorting )
+-Providing the ways to the user to customize the folder names as per their requirement 
 
 
 

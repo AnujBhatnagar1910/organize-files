@@ -1,10 +1,3 @@
-# to sort the contents of the folder by name 
-
-# create different folders and put the contents of the folder in respective folders 
-
-
-# to sort the contents of the folder by name 
-
 ##TODO - how to make it useful for the user to use this ? desktop app with a ui ?
 # worth checking - https://code-b.dev/blog/building-desktop-applications-using-python
 
@@ -15,8 +8,8 @@ import logging
 from enum import Enum
 
 logging.basicConfig(
-    level=logging.INFO,  # Set the minimum log level to INFO
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'  # Define log message format
+    level=logging.INFO,  
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'  
 )
 
 logger = logging.getLogger(__name__)
@@ -40,11 +33,6 @@ Future implementations:
 
 
 '''
-
-
-### TODO reverting changes ? Roll back  - Done - need to check how to persist the variable values
-    ### Any way to keep the list of files and file extensions persistent in one run more ? - running as a script 
-
 
 
 class FolderName(Enum):
@@ -109,7 +97,7 @@ def create_folder_based_on_list_items(input_list,path_where_folder_is_required_t
     # sanitize input_list and replace it with the values 
     folder_names = get_unique_folder_names(input_list)
      
-        # create folder based on the new list 
+    # create folder based on the new list 
     for file in folder_names:
          logger.info(f"----folder_name is : {file}")
          directory_path = os.path.join(path_where_folder_is_required_to_be_created,file)
@@ -195,9 +183,9 @@ def main():
         
     
 
-    #folder_path = "C:\\Users\\abhatna3\\Desktop\\testfolder"
-    # folder_path = "C:\\Users\\abhatna3\\Desktop"
-    
+# test the working code
+    #folder_path = "xx"
+   
     
  ##---------------------working---------------------------- 
     # files_under_consideration = get_files_list_from_location(folder_path)
@@ -223,10 +211,6 @@ def main():
 
   
   
-  
-
-
-
 if __name__ == "__main__":
     main()
 

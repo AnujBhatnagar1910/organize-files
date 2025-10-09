@@ -22,6 +22,8 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         uvx ruff check $(git ls-files '*.py')
+        echo "-------test changes----------"
+        pwd
         cd ../..
         pwd
         cd ./src/code

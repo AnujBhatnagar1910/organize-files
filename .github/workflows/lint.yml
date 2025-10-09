@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: [ "3.10","3.11","3.12","3.13","3.14"]
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -21,10 +21,5 @@ jobs:
         uv tool install ruff@latest
     - name: Analysing the code with pylint
       run: |
-        # uvx ruff check $(git ls-files '*.py')
-        echo "-------test changes----------"
-        pwd
-        cd ./src/code
-        pwd
-        ls
-        uvx ruff check
+        uvx ruff check $(git ls-files '*.py')
+        
